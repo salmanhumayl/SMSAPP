@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using SMSAPP.Model;
 using System;
 using System.Collections.Generic;
@@ -87,8 +88,12 @@ namespace SMSAPP.Controllers
                 }
                 else
                 {
-
-                        return NotFound();
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+                      
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
+                   // return StatusCode((int)response_API.StatusCode);
                 }
 
             }
@@ -117,7 +122,11 @@ namespace SMSAPP.Controllers
                 else
                 {
 
-                        return NotFound();
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
 
             }

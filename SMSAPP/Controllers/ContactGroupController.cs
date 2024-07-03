@@ -35,7 +35,11 @@ namespace SMSAPP.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
 
             }
@@ -64,7 +68,11 @@ namespace SMSAPP.Controllers
                 else
                 {
 
-                    return NotFound();
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
 
             }
@@ -92,7 +100,11 @@ namespace SMSAPP.Controllers
                 else
                 {
 
-                    return NotFound(); 
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
 
             }
@@ -118,7 +130,11 @@ namespace SMSAPP.Controllers
                 }
                 else
                 {
-                    return NotFound(); 
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
             }
 
@@ -141,7 +157,11 @@ namespace SMSAPP.Controllers
                     return Ok(responseString_API);
                 }
             }
-            return NotFound();
+            return StatusCode((int)response_API.StatusCode, new Response
+            {
+
+                Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+            });
         }
 
     }

@@ -33,8 +33,13 @@ namespace SMSAPP.Controllers
                     responseString_API = await response_API.Content.ReadAsStringAsync();
                     return Ok(responseString_API);
                 }
+                
             }
-            return NotFound();
+            return StatusCode((int)response_API.StatusCode, new Response
+            {
+
+                Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+            });
         }
 
         [HttpPost]
@@ -158,7 +163,11 @@ namespace SMSAPP.Controllers
                 else
                 {
 
-                        return NotFound();
+                    return StatusCode((int)response_API.StatusCode, new Response
+                    {
+
+                        Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+                    });
                 }
 
             }
@@ -184,8 +193,13 @@ namespace SMSAPP.Controllers
                     responseString_API = await response_API.Content.ReadAsStringAsync();
                     return Ok(responseString_API);
                 }
+
             }
-            return NotFound();
+            return StatusCode((int)response_API.StatusCode, new Response
+            {
+
+                Message = "Unsuccessful! Please try again. " + response_API.RequestMessage
+            });
         }
 
     }

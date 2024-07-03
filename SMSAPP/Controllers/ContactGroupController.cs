@@ -118,7 +118,7 @@ namespace SMSAPP.Controllers
 
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("DeleteGroup")]
         public async Task<ActionResult> DeleteGroup(string group_id)
         {

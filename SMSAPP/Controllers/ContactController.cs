@@ -192,8 +192,8 @@ namespace SMSAPP.Controllers
 
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SMSAPPAuthorization:Token"]);
 
-                //   var json = Newtonsoft.Json.JsonConvert.SerializeObject(group_id);
-                //   request.Content = new StringContent(json, Encoding.UTF8, "application/json");
+                  var json = Newtonsoft.Json.JsonConvert.SerializeObject(group_id);
+                  request.Content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 response_API = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
                 if (response_API.StatusCode == System.Net.HttpStatusCode.OK)

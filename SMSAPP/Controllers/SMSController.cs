@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using SMSAPP.Model;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,17 @@ namespace SMSAPP.Controllers
 {
     public class SMSController : ControllerBase
     {
-        private string _access_token = "221|GVFl3UqxspnpHUS47BQyeu97QuwIImKFQVoGgqBX";
+       
         HttpResponseMessage response_API = null;
         string responseString_API = "";
+        private IConfiguration _configuration;
+
+        public SMSController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
+
 
         [HttpPost]
         [Route("SendoutboundSMS")]
@@ -25,7 +34,7 @@ namespace SMSAPP.Controllers
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://connect.smsapp.pk/api/v3/sms/send");
 
                 request.Headers.Add("Accept", "application/json");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _access_token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SMSAPPAuthorization:Token"]);
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                 response_API = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
@@ -56,7 +65,7 @@ namespace SMSAPP.Controllers
             using (var httpClient = new HttpClient())
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, "https://connect.smsapp.pk/api/v3/sms/send-bulk-messages");
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _access_token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SMSAPPAuthorization:Token"]);
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(messages);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                 response_API = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
@@ -89,7 +98,7 @@ namespace SMSAPP.Controllers
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, string.Format("https://connect.smsapp.pk/api/v3/sms/{0}", uid));
 
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _access_token);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SMSAPPAuthorization:Token"]);
 
                 var json = Newtonsoft.Json.JsonConvert.SerializeObject(uid);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");

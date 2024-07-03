@@ -86,7 +86,7 @@ namespace SMSAPP.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPatch]
         [Route("UpdateGroup")]
         public async Task<ActionResult> UpdateGroup(UpdateGroup model)
         {

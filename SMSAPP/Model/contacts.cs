@@ -31,4 +31,11 @@ namespace SMSAPP.Model
         public string uid { get; set; }
 
     }
+    public class UpdateQueryParameters
+    {
+        public Int64 phone { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+    }
 }
+

@@ -114,7 +114,7 @@ namespace SMSAPP.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPatch]
         [Route("UpdateContact")]
         public async Task<ActionResult> UpdateContact(UpdateContacts model)
         {
@@ -122,8 +122,13 @@ namespace SMSAPP.Controllers
             {
                 HttpRequestMessage request = new HttpRequestMessage(new HttpMethod("PATCH"), String.Format("https://connect.smsapp.pk/api/v3/contacts/{0}/update/{1}", model.group_id, model.uid));
 
+                UpdateQueryParameters obj = new UpdateQueryParameters();
+                obj.phone=model.phone;
+                obj.first_name=model.first_name;
+                obj.last_name = model.last_name;
+
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _configuration["SMSAPPAuthorization:Token"]);
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(model);
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
                 request.Content = new StringContent(json, Encoding.UTF8, "application/json");
                 response_API = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
 

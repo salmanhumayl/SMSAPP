@@ -24,7 +24,7 @@ namespace SMSAPP.Controllers
         }
         [HttpPost]
         [Route("SendoutboundMMS")]
-        public async Task<ActionResult> SendoutboundMMS(smsapp_connect model)
+        public async Task<ActionResult> SendoutboundMMS(mmsapp_connect model)
         {
             using (var httpClient = new HttpClient())
             {

@@ -60,7 +60,7 @@ namespace SMSAPP.Controllers
 
         [HttpPost]
         [Route("SendBulkMessages")]
-        public async Task<ActionResult> SendBulkMessages(List<messages> messages)
+        public async Task<ActionResult> SendBulkMessages([FromBody] List<messages> messages)
         {
             using (var httpClient = new HttpClient())
             {
